@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
 		mailMessage.setTo(userRegister.getEmail());
 		mailMessage.setFrom("official@gmail.com");
 		mailMessage.setSubject("Verify Email");
-		mailMessage.setText("To confirm your account, please click here: " + "http://localhost:8080/confirm-account?token=" +
+		mailMessage.setText("To confirm your account, please click here: " + "http://localhost:8082/confirm-account?token=" +
 							confirmationToken.getconfirmationToken());
 		emailService.sendEmail(mailMessage);
 	}
@@ -101,7 +101,7 @@ public class UserServiceImpl implements UserService {
 		mailMessage.setTo(user.getEmail());
 		mailMessage.setFrom("official@gmail.com");
 		mailMessage.setSubject("Reset Password");
-		mailMessage.setText("To complete the password reset process, please click here: " + "http://localhost:8080/confirm-reset?token=" +
+		mailMessage.setText("To complete the password reset process, please click here: " + "http://localhost:8082/confirm-reset?token=" +
 							confirmationToken.getconfirmationToken());
 		emailService.sendEmail(mailMessage);
 	}
