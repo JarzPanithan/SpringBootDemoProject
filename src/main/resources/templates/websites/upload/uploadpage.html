@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link rel="stylesheet" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+		<link rel="stylesheet" th:href="@{/css/upload.css}">
+		<title>Spring Boot Demo</title>
+	</head>
+	<body>
+		<!-- Uploadpage Navbar -->
+		<nav id="headerBar" class="navbar navbar-inverse navbar-dark bg-dark">
+			<div class="container-fluid">
+				<div class="d-flex justify-content-between">
+					<div id="leftContents" class="top-menu d-flex align-items-center navbar-header">
+						<button id="sideCollapseOpen" class="navbar-toggler navbar-brand sidebarOpenButton" data-toggle="collapse" data-target="#navbarToggleExternalContent"
+			  	 	 	 aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      		  				<i class="fa fa-bars text-light"></i>
+    					</button>
+    					<div class="top-menu d-flex align-items-center">
+							<a id="headerTitle" href="/" class="text-light"><h3 th:text="#{message.titleNavbar}"></h3></a>
+						</div>
+					</div>
+				</div>
+				<div class="d-flex justify-content-between">
+					<div id="userInfo" class="top-menu d-flex align-items-center nav navbar-nav navbar-right row">
+						<div class="d-flex align-items-center row">
+							<img id="avatarImage" src="../images/avatar.png" alt="profile"></img>&nbsp;&nbsp;
+							<p sec:authroize="isAuthenticated()"></p>
+							<span class="text-light" sec:authentication="principal.username">User</span>&nbsp;&nbsp;&nbsp;&nbsp;
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<!-- Menu Bar -->
+		<div id="main">
+			<div id="menuNavbar">
+				<a href="/product/productpage" class="text-light"><i class="fa fa-product-hunt text-light space-icon"></i><span th:text="#{link.productPage}"></span></a>
+				<a href="/product2/productpage2" class="text-light"><i class="fa fa-product-hunt text-light space-icon"></i><span th:text="#{link.product2Page}"></span></a>
+				<a href="/upload/uploadpage" class="text-light"><i class="fa fa-upload text-light space-icon"></i><span th:text="#{link.uploadPage}"></span></a>
+				<a th:href="@{/logout}" class="text-light"><i class="fa fa-sign-out text-light space-icon"></i><span th:text="#{button.logout}"></span></a>
+			</div>
+		</div>
+		<!-- Uploadpage Contents -->
+		<div align="center" class="container-fluid">
+			<div id="uploadContent">
+			<br>
+			<h1 th:text="#{message.uploadFileProject}"></h1>
+			<br>
+			<div th:if="${message}" class="alert alert-danger container">
+				<p th:text="${message}"></p>
+			</div>
+			<form action="#" th:action="@{/upload/upload_file}" method="post" enctype="multipart/form-data">
+				<div class="custom-file container">
+					<input type="file" name="files" class="custom-file-input" id="customFile" required>
+					<label class="custom-file-label" for="customFile" th:text="#{message.chooseFile}"></label>
+					<br><br>
+					<button type="submit" class="btn btn-success btn-block" th:text="#{button.uploadFile}"></button>
+				</div>
+			</form>
+			<br>
+			<h1 th:text="#{message.uploadFileDatabase}"></h1>
+			<br>
+			<form action="#" th:action="@{/upload/upload_files}" method="post" enctype="multipart/form-data">
+				<div class="custom-file container">
+					<input type="file" name="multifiles" class="custom-file-input" id="customFile" multiple required>
+					<label class="custom-file-label" for="customFile" th:text="#{message.chooseFile}"></label>
+					<br><br>
+					<button type="submit" class="btn btn-success btn-block" th:text="#{button.uploadFile}"></button>
+				</div>
+			</form>
+			</div>
+			<br>
+			<h1 th:text="#{message.fileData}"></h1>
+			<!-- <br>
+			<table>
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Name</th>
+						<th>Type</th>
+						<th>Download Link</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="document: ${documents}">
+						<td th:text="${document.docId}"></td>
+						<td th:text="${document.docName}"></td>
+						<td th:text="${document.docType}"></td>
+						<td><a th:href="@{'/upload/downloadFile/' + ${document.docId}}">Download</a></td>
+					</tr>
+				</tbody>
+			</table> -->
+			<br>
+			<table id="fileTable" class="display table table-hover mb-0" cellspacing="0" width="100%">
+				<thead>
+					<tr>
+						<th class="text-center align-middle" th:text="#{message.fileId}"></th>
+						<th class="text-center align-middle" th:text="#{message.fileName}"></th>
+						<th class="text-center align-middle" th:text="#{message.fileType}"></th>
+						<th class="text-center align-middle" th:text="#{message.actions}"></th>
+						<th class="text-center align-middle" th:text="#{message.fileData}"></th>
+					</tr>
+				</thead>
+				<tbody id="resultDataTable">
+				
+				</tbody>
+				<tfoot>
+					<tr>
+						<th class="text-center align-middle" th:text="#{message.fileId}"></th>
+						<th class="text-center align-middle" th:text="#{message.fileName}"></th>
+						<th class="text-center align-middle" th:text="#{message.fileType}"></th>
+						<th class="text-center align-middle" th:text="#{message.actions}"></th>
+						<th class="text-center align-middle" th:text="#{message.fileData}"></th>
+					</tr>
+				</tfoot>
+			</table>
+			<br>
+			<a href="/" class="btn btn-primary btn-block"><span th:text="#{button.backToHomePage}"></span></a>
+			<br>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+		<script src="node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="/js/upload.js"></script>
+	</body>
+</html>

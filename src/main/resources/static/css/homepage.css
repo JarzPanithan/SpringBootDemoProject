@@ -1,0 +1,168 @@
+#avatarImage {
+	width: 50px;
+}
+
+#copyRightContent {
+	background-color: #303030;
+	bottom: 0;
+	color: white;
+	left: 0;
+	position: fixed;
+	text-align: center;
+	width: "100%";
+}
+
+.footerBetween {
+	margin-left: 2cm;
+}
+
+#footerContents {
+	background-color: #343a40;
+	bottom: 0;
+	color: white;
+	left: 0;
+	margin-bottom: 12px;
+	position: fixed;
+	width: "100%";
+}
+
+#footerContent {
+	margin-left: 0;
+	transition: 1.0s;
+}
+
+#footerContent.active {
+	margin-left: 7.0cm;
+	transition: 1.0s;
+}
+
+.footerImage {
+	margin-left: 1.5cm;
+	width: 110px;
+}
+
+.footerSpace {
+	margin-bottom: 0.5cm;
+	margin-top: 0.5cm;
+}
+
+#headeBar {
+	padding-left: 16px;
+	transition: 1.0s;
+}
+
+#headerBar.active {
+	padding-left: 0;
+	transition: 1.0s;
+}
+
+#headerTitle:active {
+	text-align: center;
+	text-decoration: none;
+}
+
+#headerTitle:hover {
+	text-align: center;
+	text-decoration: none;
+}
+
+#leftContents {
+	font-size: 30px;
+	transition: 1.0s;
+}
+
+#leftContents.active {
+	font-size: 30px;
+	margin-left: 8cm;
+	transition: 1.0s;
+}
+
+.linkColor:visited {
+	color: white;
+	text-decoration: none;
+}
+
+.linkColor:link {
+	color: white;
+}
+
+.linkColor:hover {
+	color: #57d105;
+	text-decoration: none;
+}
+
+#menuNavbar {
+	background-color: #343a40;
+	height: 100%;
+	left: 0;
+	margin-left: 0;
+	overflow-x: hidden;
+	padding-top: 30px;
+	position: fixed;
+	top: 0;
+	transition: 0.5s;
+	width: 0;
+	z-index: 1;
+}
+
+#menuNavbar.active {
+	background-color: #343a40;
+	height: 100%;
+	right: 0;
+	overflow-x: hidden;
+	padding-top: 30px;
+	position: fixed;
+	top: 0;
+	transition: 0.5s;
+	width: 300px;
+	z-index: 1;
+}
+
+#menuNavbar a {
+	color: white;
+	display: block;
+	font-size: 25px;
+	padding: 8px 8px 8px 32px;
+	text-decoration: none;
+	transition: 0.53;
+}
+
+#menuNavbar a:hover {
+	background-color: black;
+	color: white;
+}
+
+#menuNavbar .closebtn {
+	font-size: 36px;
+	margin-left: 50px;
+	position: absolute;
+	right: 25px;
+	top: 0;
+}
+
+@media screen and (max-height: 450px) {
+	.sidenav { padding-top: 15px; }
+	.sidenav a { font-size: 18px; }
+}
+
+.sidebarOpenButton {
+	height: 50px;
+	width: 50px;
+}
+
+.space-icon {
+	margin-right: 0.4cm;
+}
+
+#titleWeb.active {
+	padding-left: 0;
+	transition: 1.0s;
+}
+
+#userInfo {
+	padding-bottom: 13px;
+}
+
+#userInfo.active {
+	padding-left: 13px;
+}

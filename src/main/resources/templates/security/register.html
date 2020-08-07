@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head >
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-sacle=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> 
+		<title>Spring Boot Demo</title>
+	</head>
+	<body>
+		<nav class="navbar navbar-dark bg-dark">
+			<h2 class="text-light" th:text="#{message.titleNavbar}"></h2>
+		</nav>
+		<div align="center" class="container">
+			<br>
+			<h1 th:text="#{message.register}"></h1>
+			<br>
+			<div class="alert alert-info" th:if="${param.success}">
+				You have been sucessfully registered.
+			</div>
+			<form action="#" th:action="@{/register}" th:object="${user}" method="post">
+     			<div class="alert alert-danger" th:if="${#fields.hasGlobalErrors()}" th:each="error : ${#fields.errors('global')}" th:text="${error}">
+     				Validation Error
+     			</div>
+     			<div class="form-group" th:classappend="${#fields.hasErrors('firstName')}? 'has-error':''">
+      				<label for="firstName" class="control-label" th:text="#{message.firstName}"></label>
+      				<input id="firstName" class="form-control" th:field="*{firstName}">
+      				<br>
+      				<div class="alert alert-danger" th:each="error: ${#fields.errors('firstName')}" th:text="${error}">
+      					Validation error
+      				</div>
+     			</div>
+     			<div class="form-group" th:classappend="${#fields.hasErrors('lastName')}? 'has-error':''">
+      				<label for="lastName" class="control-label" th:text="#{message.lastName}"></label>
+      				<input id="lastName" class="form-control" th:field="*{lastName}">
+      				<br>
+      				<div class="alert alert-danger" th:each="error : ${#fields.errors('lastName')}" th:text="${error}">
+      					Validation Error
+      				</div>
+     			</div>
+     			<div class="form-group" th:classappend="${#fields.hasErrors('email')}? 'has-error':''">
+      				<label for="email" class="control-label" th:text="#{message.email}"></label>
+      				<input id="email" class="form-control" th:field="*{email}">
+      				<br>
+      				<div class="alert alert-danger" th:each="error : ${#fields.errors('email')}" th:text="${error}">
+      					Validation Error
+      				</div>
+     			</div>
+     			<div class="form-group" th:classappend="${#fields.hasErrors('confirmEmail')}? 'has-error':''">
+      				<label for="confirmEmail" class="control-label" th:text="#{message.confirmEmail}"></label>
+      				<input id="confirmEmail" class="form-control" th:field="*{confirmEmail}">
+      				<br>
+      				<div class="alert alert-danger" th:each="error : ${#fields.errors('confirmEmail')}" th:text="${error}">
+      					Validation error
+      				</div>
+     			</div>
+     			<div class="form-group" th:classappend="${#fields.hasErrors('password')}? 'has-error':''">
+      				<label for="password" class="control-label" th:text="#{message.password}"></label>
+      				<input id="password" class="form-control" type="password" th:field="*{password}">
+      				<br>
+      				<div class="alert alert-danger" th:each="error : ${#fields.errors('password')}" th:text="${error}">
+      					Validation Error
+      				</div>
+     			</div>
+     			<div class="form-group" th:classappend="${#fields.hasErrors('confirmPassword')}? 'has-error':''">
+      				<label for="confirmPassword" class="control-label" th:text="#{message.confirmPassword}"></label>
+      				<input id="confirmPassword" class="form-control" type="password" th:field="*{confirmPassword}">
+      				<br>
+      				<div class="alert alert-danger" th:each="error : ${#fields.errors('confirmPassword')}" th:text="${error}">
+      					Validation Error
+      				</div>
+     			</div>
+     			<div class="form-group" th:classappend="${#fields.hasErrors('terms')}? 'has-error':''">
+      				<input id="terms" type="checkbox" th:field="*{terms}">
+      				<label class="control-label" for="terms" th:text="#{message.agreeRegister}"></label>
+      				<br>
+      				<div class="alert alert-danger" th:each="error : ${#fields.errors('terms')}" th:text="${error}">
+      					Validation Error
+      				</div>
+     			</div>
+     			<div class="form-group">
+      				<button type="submit" class="btn btn-success" th:text="#{button.register}"></button>
+     				<span th:text="#{message.alreadyRegister}"></span> <a th:href="@{/login}"><span th:text="#{link.loginHere}"></span></a>
+     			</div>
+			</form>
+		</div>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+	</body>
+</html>
